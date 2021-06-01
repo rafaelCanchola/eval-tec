@@ -1,6 +1,5 @@
 package com.rc.evaltec.models.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,28 +15,44 @@ public class IContratoServiceImpl implements IContratoService{
 	private IContratoDao contratoDao;
 	@Override
 	public List<Contrato> findAll() {
-		// TODO Auto-generated method stub
 		return contratoDao.findAll();
 	}
 
 	@Override
 	public Contrato save(Contrato contrato) {
-		// TODO Auto-generated method stub
-		SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd");
 		return contratoDao.save(contrato);
 	}
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
 		contratoDao.deleteById(id);
 		
 	}
 
 	@Override
 	public Contrato findById(Long id) {
-		// TODO Auto-generated method stub
 		return contratoDao.findById(id).get();
+	}
+
+	//Punto 1
+	@Override
+	public List<Contrato> findAllByUsuarioNombre(String nombre) {
+		// TODO Auto-generated method stub
+		return contratoDao.findAllByUsuarioNombre(nombre);
+	}
+
+	//Punto 4
+	@Override
+	public List<Contrato> findAllByNodoEntrega(String idNodo) {
+		// TODO Auto-generated method stub
+		return contratoDao.findAllByNodoEntrega(idNodo);
+	}
+
+	//Punto 2
+	@Override
+	public Contrato findByFolio(String folio) {
+		// TODO Auto-generated method stub
+		return contratoDao.findByFolio(folio);
 	}
 
 }

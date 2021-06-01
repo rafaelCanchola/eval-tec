@@ -15,4 +15,10 @@ public interface IContratoService {
 	
 	public Contrato findById(Long id);
 	
+	public List<Contrato> findAllByUsuarioNombre(String nombre);
+	
+	public List<Contrato> findAllByNodoEntrega(String idNodo);
+
+	public Contrato findByFolio(String folio);
+	
 }
