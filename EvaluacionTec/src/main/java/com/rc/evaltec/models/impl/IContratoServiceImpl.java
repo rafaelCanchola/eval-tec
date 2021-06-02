@@ -97,4 +97,29 @@ public class IContratoServiceImpl implements IContratoService{
 		return contratoDao.menorDosMil();
 	}
 
+	@Override
+	public List<Contrato> diasMarzo() {
+		// TODO Auto-generated method stub
+		return contratoDao.diasMarzo();
+	}
+
+	@Override
+	public List<Contrato> listaFebrero() {
+		// TODO Auto-generated method stub
+		return contratoDao.listaFebrero();
+	}
+
+	@Override
+	public Float minimoVal() {
+		// TODO Auto-generated method stub
+		return contratoDao.minimoVal();
+	}
+
+	@Override
+	public Float maxnimoVal() {
+		// TODO Auto-generated method stub
+		return contratoDao.maximoVal();
+	}
+
+
 }

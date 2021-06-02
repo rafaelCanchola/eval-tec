@@ -9,7 +9,7 @@ import tw from "twin.macro";
 import styled from "styled-components";
 
 import imagenFondo from "./images/person.svg"
-
+import entidad from "./images/ER.png"
 import Table from "./pages/Table";
 import {render} from "react-dom";
 
@@ -19,6 +19,10 @@ const LeftColumn = tw.div`ml-6 mr-6 xl:pl-6 py-6 `;
 const RightColumn = styled.div`
   background-image: url(${imagenFondo});
   ${tw`bg-teal-500 bg-cover bg-center xl:ml-24 h-96 lg:h-auto lg:w-1/2 lg:flex-1`}
+  `;
+const Entidad = styled.div`
+  background-image: url(${entidad});
+  ${tw`bg-teal-500 bg-cover bg-center lg:h-auto lg:w-full lg:flex-1`}
   `;
 
 const Content = tw.div`mt-24 lg:mt-24 lg:mb-24 flex flex-col sm:items-center lg:items-center`;
@@ -65,6 +69,16 @@ const heading = (
             <span tw="text-teal-500">José Rafael <br/>Canchola Angeles</span>
         </>
 );
+
+const heading2 = (
+    <>
+        Modelo Entidad<br/>
+        Relación
+        <wbr />
+        <br />
+        <span tw="text-teal-500"><br/><br/><br/><br/><br/><br/><br/></span>
+    </>
+);
 const StyledHeader = styled(Header)`
   ${tw`justify-between`}
   ${LogoLink} {
@@ -105,7 +119,7 @@ function App() {
     const defaultLinks = [
         <NavLinks key={1}>
             <NavLink href="/#ej1">Ver Ejercicios</NavLink>
-            <NavLink href="/#">Ver Modelo E/R</NavLink>
+            <NavLink href="/#er">Ver Modelo E/R</NavLink>
             <NavLink href="/#"><input type="file" name="file" onChange={changeHandler}/></NavLink>
             <PrimaryLink href="/#" onClick={handleSubmission}>Subir CSV</PrimaryLink>
         </NavLinks>
@@ -528,6 +542,159 @@ function App() {
             },
         ],[])
 
+    const header17 = React.useMemo(
+        () => [
+            {
+                Header: 'Usuarios con Cargo Uso mayor a $1,000,000',
+                columns: [
+                    {
+                        Header: 'Nombre',
+                        accessor: 'usuario.usuario.nombre',
+                    },
+                    {
+                        Header: 'Cargo Uso',
+                        accessor: 'cargo_uso',
+                    },
+                ],
+            },
+        ],[])
+
+    const header18 = React.useMemo(
+        () => [
+            {
+                Header: 'Usuarios del 29 de Marzo al 31 de Marzo ',
+                columns: [
+                    {
+                        Header: 'Nombre',
+                        accessor: 'usuario.usuario.nombre',
+                    },
+                    {
+                        Header: 'Total a Facturar',
+                        accessor: 'total',
+                    },
+                    {
+                        Header: 'Cant. Asig. Entrega',
+                        accessor: 'c_asi_ent',
+                    },
+                    {
+                        Header: 'Cant. Asig. Recepción',
+                        accessor: 'c_asi_rec',
+                    },
+                    {
+                        Header: 'Cant. Nomi. Entrega',
+                        accessor: 'c_nom_ent',
+                    },
+                    {
+                        Header: 'Cant. Nomi. Recepción',
+                        accessor: 'c_nom_rec',
+                    },
+                    {
+                        Header: 'Cargo Exceso',
+                        accessor: 'cargo_exceso',
+                    },
+                    {
+                        Header: 'Cargo Uso ',
+                        accessor: 'cargo_uso',
+                    },
+                    {
+                        Header: 'Folio',
+                        accessor: 'folio',
+                    },
+                    {
+                        Header: 'Fecha',
+                        accessor: 'fecha',
+                    },
+                    {
+                        Header: 'Nodo Entrega',
+                        accessor: 'usuario.entrega.id',
+                    },
+                    {
+                        Header: 'Nodo Recepción',
+                        accessor: 'usuario.recepcion.id',
+                    },
+
+                ],
+            },
+        ],[])
+
+    const header19 = React.useMemo(
+        () => [
+            {
+                Header: 'Usuarios del 14 de Febrero y cantidad nominada < 1,600 ',
+                columns: [
+                    {
+                        Header: 'Nombre',
+                        accessor: 'usuario.usuario.nombre',
+                    },
+                    {
+                        Header: 'Total a Facturar',
+                        accessor: 'total',
+                    },
+                    {
+                        Header: 'Cant. Asig. Entrega',
+                        accessor: 'c_asi_ent',
+                    },
+                    {
+                        Header: 'Cant. Asig. Recepción',
+                        accessor: 'c_asi_rec',
+                    },
+                    {
+                        Header: 'Cant. Nomi. Entrega',
+                        accessor: 'c_nom_ent',
+                    },
+                    {
+                        Header: 'Cant. Nomi. Recepción',
+                        accessor: 'c_nom_rec',
+                    },
+                    {
+                        Header: 'Cargo Exceso',
+                        accessor: 'cargo_exceso',
+                    },
+                    {
+                        Header: 'Cargo Uso ',
+                        accessor: 'cargo_uso',
+                    },
+                    {
+                        Header: 'Folio',
+                        accessor: 'folio',
+                    },
+                    {
+                        Header: 'Fecha',
+                        accessor: 'fecha',
+                    },
+                    {
+                        Header: 'Nodo Entrega',
+                        accessor: 'usuario.entrega.id',
+                    },
+                    {
+                        Header: 'Nodo Recepción',
+                        accessor: 'usuario.recepcion.id',
+                    },
+
+                ],
+            },
+        ],[])
+
+    const header20 = React.useMemo(
+        () => [
+            {
+                Header: 'Minimo y Máximo de Total a Facturar Enestas ',
+                columns: [
+                    {
+                        Header: 'Minimo',
+                        accessor: 't_exceso',
+                    },
+                    {
+                        Header: 'Màximo',
+                        accessor: 't_uso',
+                    },
+
+
+
+                ],
+            },
+        ],[])
+
     //@ts-ignore
     const EjercicioUno = (nombre,ejercicio) =>{
         setSelectedResult(ejercicio)
@@ -644,10 +811,10 @@ function App() {
                         </Separator>
                         <Separator>
                             <PrimaryLink href="/#ej1" onClick={ () => EjercicioUno("",16)} >Cargar Ejercicio 16</PrimaryLink>
-                            <PrimaryLink href="/#ej1" onClick={ () => EjercicioCinco("",17)} >Cargar Ejercicio 17</PrimaryLink>
-                            <PrimaryLink href="/#ej1" onClick={ () => EjercicioCinco("",18)} >Cargar Ejercicio 18</PrimaryLink>
-                            <PrimaryLink href="/#ej1" onClick={ () => EjercicioCinco("",19)} >Cargar Ejercicio 19</PrimaryLink>
-                            <PrimaryLink href="/#ej1" onClick={ () => EjercicioCinco("",20)} >Cargar Ejercicio 20</PrimaryLink>
+                            <PrimaryLink href="/#ej1" onClick={ () => EjercicioSiete("",17)} >Cargar Ejercicio 17</PrimaryLink>
+                            <PrimaryLink href="/#ej1" onClick={ () => EjercicioUno("",18)} >Cargar Ejercicio 18</PrimaryLink>
+                            <PrimaryLink href="/#ej1" onClick={ () => EjercicioUno("",19)} >Cargar Ejercicio 19</PrimaryLink>
+                            <PrimaryLink href="/#ej1" onClick={ () => EjercicioUno("",20)} >Cargar Ejercicio 20</PrimaryLink>
                         </Separator>
                             <Styles>
                             {!resultOne[0] ? <></>:
@@ -668,14 +835,27 @@ function App() {
                                                                                         selectedResult === 14 ? <Table columns={header14} data={resultOne}/>:
                                                                                             selectedResult === 15 ? <Table columns={header15} data={resultOne}/>:
                                                                                                 selectedResult === 16 ? <Table columns={header16} data={resultOne}/>:
-                                                                                                    selectedResult === 17 ? <Table columns={header13} data={resultOne}/>:
-                                                                                                        selectedResult === 18 ? <Table columns={header13} data={resultOne}/>:
-                                                                                                            selectedResult === 19 ? <Table columns={header13} data={resultOne}/>:
-                                                                                                                <Table columns={header1} data={resultOne}/>
+                                                                                                    selectedResult === 17 ? <Table columns={header17} data={resultOne}/>:
+                                                                                                        selectedResult === 18 ? <Table columns={header18} data={resultOne}/>:
+                                                                                                            selectedResult === 19 ? <Table columns={header19} data={resultOne}/>:
+                                                                                                                <Table columns={header20} data={resultOne}/>
                             }
                         </Styles>
                     </Content>
                 </Container>
+            </div>
+            <div id={"er"}>
+                <Container>
+                        <TwoColumn>
+                            <LeftColumn>
+                                <Content>
+                                    <Heading>{heading2}</Heading>
+                                </Content>
+                            </LeftColumn>
+                            <Entidad/>
+                        </TwoColumn>
+                </Container>
+
             </div>
         </AnimationRevealPage>
     </div>

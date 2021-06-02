@@ -23,4 +23,7 @@ public interface IUsuarioDao extends JpaRepository<Usuario, Long>{
 	
 	@Query(value="SELECT ugtp_tbl_usuarios.* FROM ugtp_tbl_usuarios JOIN ugtp_tbl_empresas ON ugtp_tbl_usuarios.empresa_id = ugtp_tbl_empresas.id AND ugtp_tbl_empresas.nombre = ?1",nativeQuery=true)
 	List<Usuario> findNodosByNombre(String nombre);
+	
+	@Query(value="SELECT ugtp_tbl_usuarios.* FROM ugtp_tbl_usuarios JOIN ugtp_tbl_contrato ON ugtp_tbl_contrato.usuario_id = ugtp_tbl_usuarios.id AND ugtp_tbl_contrato.cargo_uso > 1000000",nativeQuery=true)
+	List<Usuario> cargoUso();
 }

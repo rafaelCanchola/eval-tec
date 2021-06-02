@@ -35,4 +35,12 @@ public interface IContratoService {
 
 	public List<Contrato> menorDosMil();
 	
+	public List<Contrato> diasMarzo();
+
+	public List<Contrato> listaFebrero();
+	
+	public Float minimoVal();
+	
+	public Float maxnimoVal();
+	
 }

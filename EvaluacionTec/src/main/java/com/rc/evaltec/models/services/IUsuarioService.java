@@ -25,5 +25,7 @@ public List<Usuario> findAll();
 	
 	public List<Usuario> findNodosByNombre(String nombre);
 	
+	public List<Usuario> cargoUso();
+	
 	
 }

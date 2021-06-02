@@ -41,5 +41,17 @@ public interface IContratoDao extends JpaRepository<Contrato,Long>{
 	
 	@Query(value="SELECT * FROM ugtp_tbl_contrato WHERE ugtp_tbl_contrato.c_asi_ent < 2000;",nativeQuery=true)
 	List<Contrato> menorDosMil();
+	
+	@Query(value="SELECT ugtp_tbl_contrato.* FROM ugtp_tbl_contrato WHERE '2021-03-29' <= ugtp_tbl_contrato.fecha AND ugtp_tbl_contrato.fecha < '2021-04-01'",nativeQuery=true)
+	List<Contrato> diasMarzo();
+	
+	@Query(value="SELECT ugtp_tbl_contrato.* FROM ugtp_tbl_contrato WHERE ugtp_tbl_contrato.c_nom_ent < 1600 AND ugtp_tbl_contrato.fecha = '2021-02-14'",nativeQuery=true)
+	List<Contrato> listaFebrero();
+	
+	@Query(value="SELECT Min(ugtp_tbl_contrato.total) as t_exceso FROM ugtp_tbl_contrato JOIN ugtp_tbl_usuarios ON ugtp_tbl_contrato.usuario_id = ugtp_tbl_usuarios.id JOIN ugtp_tbl_empresas ON ugtp_tbl_usuarios.empresa_id = ugtp_tbl_empresas.id AND ugtp_tbl_empresas.nombre = 'Enestas' AND ugtp_tbl_contrato.total > 0",nativeQuery=true)
+	Float minimoVal();
+	
+	@Query(value="SELECT Max(ugtp_tbl_contrato.total) as t_uso FROM ugtp_tbl_contrato JOIN ugtp_tbl_usuarios ON ugtp_tbl_contrato.usuario_id = ugtp_tbl_usuarios.id JOIN ugtp_tbl_empresas ON ugtp_tbl_usuarios.empresa_id = ugtp_tbl_empresas.id AND ugtp_tbl_empresas.nombre = 'Enestas' AND ugtp_tbl_contrato.total > 0",nativeQuery=true)
+	Float maximoVal();
 
 }

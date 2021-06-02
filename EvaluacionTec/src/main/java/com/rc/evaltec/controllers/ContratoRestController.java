@@ -84,6 +84,21 @@ public class ContratoRestController {
 		case 16:
 			List<Contrato> menorDosMil = contratoService.menorDosMil() ;
 			return ResponseEntity.ok(menorDosMil);
+		case 18:
+			List<Contrato> marzoDias = contratoService.diasMarzo() ;
+			return ResponseEntity.ok(marzoDias);
+		case 19:
+			List<Contrato> febrero = contratoService.listaFebrero() ;
+			return ResponseEntity.ok(febrero);
+		case 20:
+			List<Contrato> minList = new ArrayList<Contrato>();
+			Float minimo = contratoService.minimoVal();
+			Float maximo = contratoService.maxnimoVal();
+			Contrato ct = new Contrato();
+			ct.setT_exceso(minimo);
+			ct.setT_uso(maximo);
+			minList.add(ct);
+			return ResponseEntity.ok(minList);
 		default:
 			return null;
 		}
@@ -140,7 +155,9 @@ public class ContratoRestController {
 			List<Usuario> findByNombreNodos = usuarioService.findNodosByNombre(nombre);
 			System.out.println(findByNombreNodos.size());
 			return ResponseEntity.ok(findByNombreNodos);
-		
+		case 17:
+			List<Usuario> cargoUso = usuarioService.cargoUso();
+			return ResponseEntity.ok(cargoUso);
 		default:
 			return null;
 		}

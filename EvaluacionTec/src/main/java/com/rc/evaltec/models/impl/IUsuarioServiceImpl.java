@@ -70,5 +70,11 @@ public class IUsuarioServiceImpl implements IUsuarioService{
 		return usuarioDao.findNodosByNombre(nombre);
 	}
 
+	@Override
+	public List<Usuario> cargoUso() {
+		// TODO Auto-generated method stub
+		return usuarioDao.cargoUso();
+	}
+
 	
 }
