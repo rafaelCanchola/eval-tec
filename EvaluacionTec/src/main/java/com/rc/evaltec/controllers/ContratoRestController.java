@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,21 +41,130 @@ public class ContratoRestController {
 	@Autowired
 	private IEmpresaService empresaService;
 	
-	@GetMapping("/cargar")
-	public ResponseEntity<List<Contrato>>loadCSV(@RequestParam MultipartFile file){
+	@GetMapping("/ejercicioUno")
+	public ResponseEntity<List<Contrato>> ejercicioUno(@RequestParam String nombre, @RequestParam Integer ejercicio){
+		switch(ejercicio) {
+		case 1:
+			List<Contrato> findUsuario = contratoService.findAllByUsuarioNombre(nombre);
+			System.out.println(findUsuario.size());
+			return ResponseEntity.ok(findUsuario);
+		case 2:
+			List<Contrato> findFolio = new ArrayList<Contrato>();
+			findFolio.add(contratoService.findByFolio(nombre));
+			return ResponseEntity.ok(findFolio);
+		case 4:
+			List<Contrato> findAll =contratoService.findAllOrEntrega();
+			return ResponseEntity.ok(findAll);
+		case 11:
+			List<Contrato> findAllByNodos =contratoService.findContratoByNodos();
+			return ResponseEntity.ok(findAllByNodos);
+		case 12:
+			List<Contrato> findContratoFecha = new ArrayList<Contrato>();
+			findContratoFecha.add(contratoService.totalFacturarNEGFecha());
+			return ResponseEntity.ok(findContratoFecha);
+		case 13:
+			List<Contrato> contratoInfraEne =contratoService.contratoInfraEnero();
+			Float getTotal = (float) 0;
+			Contrato totalF = new Contrato();
+			for(Contrato ci : contratoInfraEne) {
+				getTotal += ci.getTotal();
+			}
+			totalF.setTotal(getTotal);
+			contratoInfraEne.add(totalF);
+			return ResponseEntity.ok(contratoInfraEne);
+		case 14:
+			List<Contrato> promedio = new ArrayList<Contrato>();
+			Contrato prom = new Contrato();
+			prom.setC_nom_rec(contratoService.promedioEneroCFE());
+			promedio.add(prom );
+			return ResponseEntity.ok(promedio);
+		case 15:
+			List<Contrato> nominaCero = contratoService.nominaCero();
+			return ResponseEntity.ok(nominaCero);
+		case 16:
+			List<Contrato> menorDosMil = contratoService.menorDosMil() ;
+			return ResponseEntity.ok(menorDosMil);
+		default:
+			return null;
+		}
 		
+	}
+	
+	@GetMapping("/ejercicioTres")
+	public ResponseEntity<List<Empresa>> ejercicioTres(@RequestParam String nombre, @RequestParam Integer ejercicio){
+		switch(ejercicio) {
+		case 3:
+			List<Empresa> findUsuarioByNodo = empresaService.findByNodoRecepcion(nombre);
+			System.out.println(findUsuarioByNodo.size());
+			return ResponseEntity.ok(findUsuarioByNodo);
+		
+		default:
+			return null;
+		}
+		
+	}
+	
+	@GetMapping("/ejercicioCinco")
+	public ResponseEntity<List<NodoComercial>> ejercicioCinco(@RequestParam String nombre, @RequestParam Integer ejercicio){
+		switch(ejercicio) {
+		case 5:
+			List<NodoComercial> findByNodo = nodoService.findByRecepcion();
+			System.out.println(findByNodo.size());
+			return ResponseEntity.ok(findByNodo);
+		case 6:
+			List<NodoComercial> findByNodoEnt = nodoService.findByEntrega();
+			System.out.println(findByNodoEnt.size());
+			return ResponseEntity.ok(findByNodoEnt);
+		default:
+			return null;
+		}
+		
+	}
+	
+	@GetMapping("/ejercicioSiete")
+	public ResponseEntity<List<Usuario>> ejercicioSiete(@RequestParam String nombre, @RequestParam Integer ejercicio){
+		switch(ejercicio) {
+		case 7:
+			List<Usuario> findByNodo = usuarioService.findByZonaTarifa(nombre);
+			System.out.println(findByNodo.size());
+			return ResponseEntity.ok(findByNodo);
+		case 8:
+			List<Usuario> findBy3Nodo = usuarioService.findBy3ZonaTarifa();
+			System.out.println(findBy3Nodo.size());
+			return ResponseEntity.ok(findBy3Nodo);
+		case 9:
+			List<Usuario> findByContrato = usuarioService.findByContrato();
+			System.out.println(findByContrato.size());
+			return ResponseEntity.ok(findByContrato);
+		case 10:
+			List<Usuario> findByNombreNodos = usuarioService.findNodosByNombre(nombre);
+			System.out.println(findByNombreNodos.size());
+			return ResponseEntity.ok(findByNombreNodos);
+		
+		default:
+			return null;
+		}
+		
+	}
+	
+	@PostMapping("/cargar")
+	public ResponseEntity<List<Contrato>>loadCSV(@RequestParam MultipartFile file){
+		System.out.println("CARGAR");
 		if(file.getOriginalFilename().isEmpty()) {
 			return ResponseEntity.status(409).build();
 		}
 		if(!CsvUtils.isCSVFile(file)) {
+			System.out.println("Not CSV");
 			return ResponseEntity.status(409).build();
 		}
 		List<Contrato> listCon = new ArrayList<Contrato>();
 		try {
 			List<CsvContrato> csvCont = CsvUtils.parseCsvFile(file.getInputStream());
+			System.out.println(csvCont.size());
+			int iterator = 1;
 			for(CsvContrato contrato: csvCont) {
+				System.out.println(iterator++);
 				Contrato ct = new Contrato();
-				
 				Usuario us = usuarioService.findByNodoId(contrato.getIdNodoEntrega());
 				if(us == null) {
 					Empresa em = empresaService.findByNombre(contrato.getUsuario());
@@ -85,7 +195,7 @@ public class ContratoRestController {
 					
 				}
 				ct.setUsuario(us);
-				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
 				ct.setFecha(sdf.parse(contrato.getFecha()).toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 				ct.setFolio(contrato.getContrato());
 				ct.setC_nom_rec(contrato.getCantNomiRec());
@@ -100,15 +210,14 @@ public class ContratoRestController {
 				ct.setTotal(contrato.getTotal());
 				listCon.add(contratoService.save(ct));
 				//em.setNombre(contrato.getUsuario());
-				return ResponseEntity.ok(listCon);	
 			}
+			return ResponseEntity.ok(listCon);	
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return ResponseEntity.status(409).build();
 		}
-		return null;
 	}
 	
 

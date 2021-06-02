@@ -20,5 +20,19 @@ public interface IContratoService {
 	public List<Contrato> findAllByNodoEntrega(String idNodo);
 
 	public Contrato findByFolio(String folio);
+
+	public List<Contrato> findAllOrEntrega();
+	
+	public List<Contrato> findContratoByNodos();
+	
+	public Contrato totalFacturarNEGFecha();
+	
+	public List<Contrato> contratoInfraEnero();
+	
+	public Float promedioEneroCFE();
+	
+	public List<Contrato> nominaCero();
+
+	public List<Contrato> menorDosMil();
 	
 }

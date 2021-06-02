@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rc.evaltec.models.dao.IEmpresaDao;
 import com.rc.evaltec.models.entity.Empresa;
+import com.rc.evaltec.models.entity.Usuario;
 import com.rc.evaltec.models.services.IEmpresaService;
 
 @Service
@@ -49,6 +50,12 @@ public class IEmpresaServiceImpl implements IEmpresaService{
 	public Empresa findByNombre(String nombre) {
 		// TODO Auto-generated method stub
 		return empresaDao.findByNombre(nombre);
+	}
+
+	@Override
+	public List<Empresa> findByNodoRecepcion(String nodo) {
+		// TODO Auto-generated method stub
+		return empresaDao.findByNodoRecepcion(nodo);
 	}
 
 }

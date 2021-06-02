@@ -28,14 +28,13 @@ public class CsvUtils {
 			fileReader = new BufferedReader(new InputStreamReader(is,"UTF-8"));
 			csvParser = new CSVParser(fileReader,
 					CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());
-	
 			Iterable<CSVRecord> csvRecords = csvParser.getRecords();
 			
 			for(CSVRecord record:csvRecords) {
 				CsvContrato contrato = new CsvContrato(
-						record.get("Fecha"),record.get("Contrato"),record.get("Usuario"),record.get("Nodo Comercial Recepción"),record.get("Descripción Nodo Comercial Recepción "),record.get("Nodo Comercial Entrega"),record.get("Descripción Nodo Comercial Entrega"),record.get("Zona de Tarifa de Inyección"),record.get("Zona de Tarifa de Extracción"),
-						Float.parseFloat(record.get("Cantidad Nominada Recepción (GJ/día)")),Float.parseFloat(record.get("Cantidad Asignada Recepción (GJ/día)")),Float.parseFloat(record.get("Cantidad Nominada Entrega (GJ/día)")),Float.parseFloat(record.get("Cantidad Asignada Entrega (GJ/día)")),Float.parseFloat(record.get(" Gas en Exceso (GJ/día)")),
-						Float.parseFloat(record.get("Tarifa Exceso Firme (Pesos/GJ) ")),Float.parseFloat(record.get("Tarifa Uso Interrumpible (Pesos/GJ)")),Float.parseFloat(record.get("Cargo Uso (Pesos)")),Float.parseFloat(record.get("Cargo Gas en Exceso (Pesos)")),Float.parseFloat(record.get("Total a facturar (Pesos)"))
+						record.get(csvParser.getHeaderNames().get(0)),record.get(csvParser.getHeaderNames().get(1)),record.get(csvParser.getHeaderNames().get(2)),record.get(csvParser.getHeaderNames().get(3)),record.get(csvParser.getHeaderNames().get(4)),record.get(csvParser.getHeaderNames().get(5)),record.get(csvParser.getHeaderNames().get(6)),record.get(csvParser.getHeaderNames().get(7)),record.get(csvParser.getHeaderNames().get(8)),
+						Float.parseFloat(record.get(csvParser.getHeaderNames().get(9))),Float.parseFloat(record.get(csvParser.getHeaderNames().get(10))),Float.parseFloat(record.get(csvParser.getHeaderNames().get(11))),Float.parseFloat(record.get(csvParser.getHeaderNames().get(12))),Float.parseFloat(record.get(csvParser.getHeaderNames().get(13))),
+						Float.parseFloat(record.get(csvParser.getHeaderNames().get(14))),Float.parseFloat(record.get(csvParser.getHeaderNames().get(15))),Float.parseFloat(record.get(csvParser.getHeaderNames().get(16))),Float.parseFloat(record.get(csvParser.getHeaderNames().get(17))),Float.parseFloat(record.get(csvParser.getHeaderNames().get(18)))
 						);
 				contratos.add(contrato);
 			}

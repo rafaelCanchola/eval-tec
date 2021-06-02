@@ -2,6 +2,7 @@ package com.rc.evaltec.models.services;
 
 import java.util.List;
 
+
 import com.rc.evaltec.models.entity.NodoComercial;
 
 public interface INodoComercialService {
@@ -13,5 +14,9 @@ public interface INodoComercialService {
 	public void delete(String id);
 	
 	public NodoComercial findById(String id);
+	
+	public List<NodoComercial> findByRecepcion();
+
+	public List<NodoComercial> findByEntrega();
 	
 }

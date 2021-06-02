@@ -46,4 +46,29 @@ public class IUsuarioServiceImpl implements IUsuarioService{
 		return usuarioDao.findByNodoId(nodo);
 	}
 
+	@Override
+	public List<Usuario> findByZonaTarifa(String zona) {
+		// TODO Auto-generated method stub
+		return usuarioDao.findByZonaTarifa(zona);
+	}
+
+	@Override
+	public List<Usuario> findBy3ZonaTarifa() {
+		// TODO Auto-generated method stub
+		return usuarioDao.findBy3ZonaTarifa();
+	}
+
+	@Override
+	public List<Usuario> findByContrato() {
+		// TODO Auto-generated method stub
+		return usuarioDao.findByContrato();
+	}
+
+	@Override
+	public List<Usuario> findNodosByNombre(String nombre) {
+		// TODO Auto-generated method stub
+		return usuarioDao.findNodosByNombre(nombre);
+	}
+
+	
 }

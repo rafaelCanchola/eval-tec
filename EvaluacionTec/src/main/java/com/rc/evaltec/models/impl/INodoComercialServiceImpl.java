@@ -1,6 +1,7 @@
 package com.rc.evaltec.models.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,26 @@ public class INodoComercialServiceImpl implements INodoComercialService{
 	@Transactional(readOnly=true)
 	public NodoComercial findById(String id) {
 		// TODO Auto-generated method stub
-		return nodoDao.findById(id).get();
+		NodoComercial nc;
+		try {
+		nc = nodoDao.findById(id).get();
+		}catch(NoSuchElementException e) {
+			//e.printStackTrace();
+			nc = null;
+		}
+		return nc;
+	}
+
+	@Override
+	public List<NodoComercial> findByRecepcion() {
+		// TODO Auto-generated method stub
+		return nodoDao.findByRecepcion();
+	}
+
+	@Override
+	public List<NodoComercial> findByEntrega() {
+		// TODO Auto-generated method stub
+		return nodoDao.findByEntrega();
 	}
 
 	

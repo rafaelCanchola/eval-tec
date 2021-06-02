@@ -55,4 +55,46 @@ public class IContratoServiceImpl implements IContratoService{
 		return contratoDao.findByFolio(folio);
 	}
 
+	@Override
+	public List<Contrato> findAllOrEntrega() {
+		// TODO Auto-generated method stub
+		return contratoDao.findAllOrEntrega();
+	}
+
+	@Override
+	public List<Contrato> findContratoByNodos() {
+		// TODO Auto-generated method stub
+		return contratoDao.findContratoByNodos();
+	}
+
+	@Override
+	public Contrato totalFacturarNEGFecha() {
+		// TODO Auto-generated method stub
+		return contratoDao.totalFacturarNEGFecha();
+	}
+
+	@Override
+	public List<Contrato> contratoInfraEnero() {
+		// TODO Auto-generated method stub
+		return contratoDao.contratoInfraEnero();
+	}
+
+	@Override
+	public Float promedioEneroCFE() {
+		// TODO Auto-generated method stub
+		return contratoDao.promedioEneroCFE();
+	}
+
+	@Override
+	public List<Contrato> nominaCero() {
+		// TODO Auto-generated method stub
+		return contratoDao.nominaCero();
+	}
+
+	@Override
+	public List<Contrato> menorDosMil() {
+		// TODO Auto-generated method stub
+		return contratoDao.menorDosMil();
+	}
+
 }
